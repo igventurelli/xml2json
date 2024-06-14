@@ -1,6 +1,6 @@
 # XML2JSON
 ![example workflow](https://github.com/igventurelli/xml2json/actions/workflows/deploy.yml/badge.svg)
-> 👉🏻 https://apps.igventurelli.io/xml2json
+> 👉🏻 https://xml2json.igventurelli.io
 
 A simple HTTP endpoint to convert XML payloads into JSON.
 
@@ -10,7 +10,7 @@ I have my personal website ([igventurelli.io](https://igventurelli.io)) where I 
 I used to use a service like this one called [RSS2JSON](https://rss2json.com) but it started to fail due to CORS blocking, so I decided to implement my own.
 
 ### How to Use
-To convert XML payloads into JSON, you just need to call https://xml2json.igventurelli.io?url={desired-url}
+To convert XML payloads into JSON, you just need to call https://api.xml2json.igventurelli.io?url={desired-url}
 
 Make sure the `desired-url` returns a XML.
 
