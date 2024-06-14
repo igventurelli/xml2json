@@ -7,30 +7,30 @@ import * as path from 'path';
 import { CfnOutput } from 'aws-cdk-lib';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 
-export class HttpApiLambdaStack extends cdk.Stack {
+export class XML2JSONStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // Dummy Lambda
-    const dummyFn = new NodejsFunction(this, "HelloWorldHandler", {
-      functionName: "dummy",
+    // Lambda
+    const fn = new NodejsFunction(this, 'XML2JSONFN', {
+      functionName: 'xml2json',
       runtime: Runtime.NODEJS_20_X,
-      entry: path.join(__dirname, `/../resources/dummy.ts`)
+      entry: path.join(__dirname, `/../resources/index.ts`)
     })
 
     // HttpApi Gateway
-    const httpApi = new HttpApi(this, "HttpApi", {
-      apiName: 'http-api'
+    const httpApi = new HttpApi(this, 'XML2JSONAPI', {
+      apiName: 'xml2json'
     })
     httpApi.addRoutes({
       path: '/',
       methods: [ HttpMethod.GET ],
-      integration: new HttpLambdaIntegration('DummyIntegration', dummyFn),
+      integration: new HttpLambdaIntegration('LambdaIntegration', fn),
     })
 
     // Outputs
-    new CfnOutput(this, "HttpApi URL", {
-      value: httpApi.url ?? "Error: can't get the HTTP API URL!",
+    new CfnOutput(this, 'HttpApi URL', {
+      value: httpApi.url ?? 'Error: can\'t get the HTTP API URL!',
     });
 
   }
